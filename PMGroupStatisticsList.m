@@ -248,9 +248,13 @@ classdef PMGroupStatisticsList
         function data =             getGroupStatisticsWithIndices(obj, Indices)
             assert(isnumeric(Indices) && isvector(Indices), 'Wrong input.')
             try
-                assert(isvector(Indices) && isnumeric(Indices) && min(Indices) >= 1 && max(Indices) <= size(obj.GroupDataList, 1), 'Wrong input.')
-            catch
-                error('Something went wrong.')
+                assert(isvector(Indices) && isnumeric(Indices) , 'Indices must be a numeric vector.')
+                assert(min(Indices) >= 1 , 'MinimumIndex must be at least 1.')
+                Temp =                          obj.GroupDataList;
+                assert(max(Indices) <= size(Temp, 1) , 'Maximum index must be maximal number of rows in group-list.')
+
+            catch ME
+                rethrow(ME)
             end
             
             data =      obj.GroupDataList(Indices, :);

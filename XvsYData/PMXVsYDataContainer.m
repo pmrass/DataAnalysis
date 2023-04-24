@@ -561,6 +561,10 @@ classdef PMXVsYDataContainer
             % each row holds the contents of a bin;
             % the columns hold the actual values;
             % each bin will not have the same number of values; "empty" columns hold "NaN" as a placeholder;
+
+
+            assert(length(obj) == 1, 'This method needs an input of precisly one object')
+
             dataMatrix = nan( length(obj.XBinLimits), 1);
             for index = 1 : length(obj.XBinLimits)
                 values = obj.getValuesInBin(index);

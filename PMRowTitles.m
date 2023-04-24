@@ -33,13 +33,26 @@ classdef PMRowTitles
          
         end
  
-         function rowTitles = getRowTitles(obj)
+     
+        
+    end
+
+    methods % GETTERS
+
+        function number = getNumberOfParameters(obj)
+
+            number = length(obj.getRowTitles);
+
+        end
+
+        function rowTitles = getRowTitles(obj)
             % GETROWTITLES gets cell array with row titles;
             % each cell contains, "gate" and "value" designation separated by comma;
             text =          obj.getText;
             rowTitles =     obj.getRowTitlesFromText(text);
         end
         
+
         
     end
     
@@ -52,12 +65,26 @@ classdef PMRowTitles
         end
         
         function text = getSummary(obj)
-             text{1} = sprintf('This PMRowTitles object helps to retrieve "row-titles", which typically represent a list of parameters for an experimental analysis.\n');
-            text = [text; sprintf('The data are retrieved from the file %s, which is located in the folder %s.\n', obj.FileName, obj.FolderName)];
-            text = [text; sprintf('The following row-titles were retrieved from this file:\n')];
-            MyTitles =  obj.getRowTitles;
-            text = [text; cellfun(@(x) sprintf('%s\n', x),MyTitles(:), 'UniformOutput', false)];
+            text{1} =       sprintf('This PMRowTitles object helps to retrieve "row-titles", which typically represent a list of parameters for an experimental analysis.\n');
+            text =          [text; sprintf('The data are retrieved from the file %s, which is located in the folder %s.\n', obj.FileName, obj.FolderName)];
+            text =          [text; sprintf('The following row-titles were retrieved from this file:\n')];
+            MyTitles =      obj.getRowTitles;
+            text =          [text; cellfun(@(x) sprintf('%s\n', x),MyTitles(:), 'UniformOutput', false)];
             
+        end
+
+        function name = getFileName(obj)
+
+            name =  obj.FileName;
+
+
+        end
+
+        function name = getPath(obj)
+
+            name = [obj.FolderName, '/', obj.FileName];
+
+
         end
         
         
@@ -68,15 +95,15 @@ classdef PMRowTitles
     methods (Access = private)
         
         function text = getText(obj)
-            text = fileread([obj.FolderName '/' obj.FileName]);
+            text = fileread(obj.getPath);
         end
         
         function titles = getRowTitlesFromText(~, text)
-            titles = strsplit(text, ';');
-            titles = cellfun(@(x) strtrim(x), titles, 'UniformOutput', false);
+            titles =            strsplit(text, ';');
+            titles =            cellfun(@(x) strtrim(x), titles, 'UniformOutput', false);
             
-            empty = cellfun(@(x) isempty(x), titles);
-            titles(empty) = [];
+            empty =             cellfun(@(x) isempty(x), titles);
+            titles(empty) =     [];
             
         end
         

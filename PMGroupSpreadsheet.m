@@ -125,8 +125,8 @@ classdef PMGroupSpreadsheet
                 try
                    assert(size(obj.Spreadsheets{index}, 2) == length(obj.ParameterTitles), 'Properties are invalid. The number of columns in the spreadsheet does not match the number of parameters.')
                    assert(length(obj.GroupRows{index}) == length(obj.GroupNames), 'Properties are invalid.The number of group-rows and group-names does not match.')
-                catch
-                   error('test') 
+                catch ME
+                   throw('ME') 
                 end
             end
             
@@ -255,7 +255,7 @@ classdef PMGroupSpreadsheet
         end
         
         
-              %% get title from data-codes:
+         %% get title from data-codes:
         function Title = getTitleFromDataCodes(obj)
             Title =         obj.DataTypeCodes;
             Title =         (Title(:))';
