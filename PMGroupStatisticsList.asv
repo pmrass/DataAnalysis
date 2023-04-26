@@ -245,28 +245,20 @@ classdef PMGroupStatisticsList
 
                case 0
 
-                   fprintf('Requested parameter: "%s".\n', Name)
                    fprintf('Available parameters:\n')
-                   cellfun(@(x) fprintf("%s\n", x), AllParameters)
-                   error('The requested parameter has no matches in the available parameters. Check your input.')
-                   
+                   cellfun(@(x) fprintf("s"))
                   
 
                case 1
 
-                        data =               obj.getGroupStatisticsWithIndices(Match);
-
                otherwise
-                    fprintf('Requested parameter: "%s".\n', Name)
-                   fprintf('Available parameters:\n')
-                   cellfun(@(x) fprintf("%s\n", x), AllParameters)
-                    error('The requested parameter has more than 1 match in the available parameters. Check your input.')
 
 
 
 
            end
-         
+           assert(length(Match) == 1, 'Request parameter has no unique match.')
+           data =               obj.getGroupStatisticsWithIndices(Match);
 
         end
         
