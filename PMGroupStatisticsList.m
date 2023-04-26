@@ -95,12 +95,12 @@ classdef PMGroupStatisticsList
             for index = 1 : obj.getNumberOfParameters
                 
                 try
-                for timeIndex = 1 : obj.getNumberOfTimePoints
-                    fprintf('\nThe PMGroupStatistics object for parameter #%i (%s) and timepoint #%i (%s) is:\n\n', index, obj.RowTitles{index}, timeIndex, MyTimeTitels{timeIndex})
-                    obj.GroupDataList(index) = obj.GroupDataList(index).showSummary;
-                end
-                catch
-                   disp('test') 
+                    for timeIndex = 1 : obj.getNumberOfTimePoints
+                        fprintf('\nThe PMGroupStatistics object for parameter #%i (%s) and timepoint #%i (%s) is:\n\n', index, obj.RowTitles{index}, timeIndex, MyTimeTitels{timeIndex})
+                        obj.GroupDataList(index) = obj.GroupDataList(index).showSummary;
+                    end
+                catch ME
+                   rethrow(ME)
                 end
                   
             end
@@ -204,12 +204,7 @@ classdef PMGroupStatisticsList
            title = obj.getRowTitlesByManualAndClustersInternal(ManualRowTitles, MainDataTypes, SubDataTypes);
        end
        
-        
-       
-        
-        
-        
-        
+   
     end
     
 
