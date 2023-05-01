@@ -458,11 +458,13 @@ classdef PMXVsYDataContainer
 
     methods % GETTERS Y-DATA IN BINS: X versus Y
         
+          function data =         getXVsYForIndividualValues(obj, varargin)
+            % GETXVSYFORINDIVIDUALVALUES returns a matrix with two columns;
+            % column 1: X-values for each measurement; this is approximately the bin value of each measurement; introduction of some "fluctuation" so that values with similar Y do not overlap;
+            % column 2: Y-values for each measurement;
+            % this method is usueful for graphical representation of individual values;
 
-
-        function [XDataForEachBin, YDataForEachBin] = getXVsYForIndividualValuesPerBin(obj, varargin)
-
-                YDataForEachBin =       obj.getYDataInBins;
+             YDataForEachBin =       obj.getYDataInBins;
             
              switch length(varargin)
                
@@ -487,19 +489,8 @@ classdef PMXVsYDataContainer
                 XDataForEachBin{index, 1} =     obj.getXForSingleValueSymbolsForBin(index, YDataInCurrentBin, Spread(index));
                    
             end
-
-
-        end
-
-          function data =         getXVsYForIndividualValues(obj, varargin)
-            % GETXVSYFORINDIVIDUALVALUES returns a matrix with two columns;
-            % column 1: X-values for each measurement; this is approximately the bin value of each measurement; introduction of some "fluctuation" so that values with similar Y do not overlap;
-            % column 2: Y-values for each measurement;
-            % this method is usueful for graphical representation of individual values;
-
-         
             
-              [XDataForEachBin,  YDataForEachBin ]=         obj.getXVsYForIndividualValues(varargin{:});
+              
             
             
             data =                  [cell2mat(XDataForEachBin), cell2mat(YDataForEachBin)];
